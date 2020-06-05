@@ -3,7 +3,7 @@ services:
   app:
     container_name: casino-app2
     build: 
-      dockerfile: Dockerfile
+      dockerfile: DockerfileDev
       context: ./
     ports:
       - "8082:8082"
