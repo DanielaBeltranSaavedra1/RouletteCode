@@ -5,12 +5,14 @@ import com.casino.roulette.roulette_casino.dto.model.RouletteDto;
 import com.casino.roulette.roulette_casino.model.Roulette;
 import com.casino.roulette.roulette_casino.repository.RouletteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@Service
 public class RouletteServiceImpl implements RouletteService {
 
     @Autowired
@@ -29,17 +31,34 @@ public class RouletteServiceImpl implements RouletteService {
 
     @Override
     public Boolean openRoulette(String rouletteId) {
+        boolean error = true;
         Optional<Roulette> roulette = rouletteRepository.findById(rouletteId);
-        roulette.ifPresent(
-                r -> {
-                    if (!r.getState()) {
-                        r.setState(Boolean.TRUE);
-                        rouletteRepository.save(r);
-                    }
-                }
-        );
+        if (roulette.isPresent()){
+            Roulette r = roulette.get();
+            if (!r.getState()) {
+                r.setState(Boolean.TRUE);
+                rouletteRepository.save(r);
+                error = false;
+            }
+        }
 
-        return Boolean.FALSE;
+        return !error;
+    }
+
+    @Override
+    public Boolean closeRoulette(String rouletteId) {
+        boolean error = true;
+        Optional<Roulette> roulette = rouletteRepository.findById(rouletteId);
+        if (roulette.isPresent()){
+            Roulette r = roulette.get();
+            if (r.getState()) {
+                r.setState(Boolean.FALSE);
+                rouletteRepository.save(r);
+                error = false;
+            }
+        }
+
+        return !error;
     }
 
     @Override

@@ -1,0 +1,18 @@
+version: "3.5"
+services:
+  app:
+    container_name: casino-app2
+    build: 
+      dockerfile: DockerfileDev
+      context: ./
+    ports:
+      - "8082:8082"
+    expose:
+      - 8082
+    links:
+      - "db:redis"
+  db:
+    image: "redis:alpine"
+    hostname: redis
+    ports:
+     - "6379:6379"

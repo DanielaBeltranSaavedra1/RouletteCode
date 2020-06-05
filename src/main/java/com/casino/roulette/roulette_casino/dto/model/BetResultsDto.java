@@ -5,11 +5,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.util.List;
+
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
-public class BetResumeDto {
+public class BetResultsDto {
     private String rouletteId;
-    private float totalAmount;
+    private int winnerNumber;
+    private String winnerColour;
+    private List<BetDto> betList;
 }

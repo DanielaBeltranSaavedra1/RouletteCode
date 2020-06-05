@@ -10,6 +10,7 @@ import java.util.Optional;
 public interface RouletteService {
     String createRoulette();
     Boolean openRoulette(String rouletteId);
+    Boolean closeRoulette(String rouletteId);
     Optional<Roulette> getRouletteById(String rouletteId);
     List<RouletteDto> getAllRouletteList();
 }

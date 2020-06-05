@@ -4,7 +4,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
+import org.springframework.data.redis.core.index.Indexed;
 
 import java.io.Serializable;
 
@@ -14,10 +16,11 @@ import java.io.Serializable;
 @NoArgsConstructor
 @RedisHash("Bet")
 public class Bet implements Serializable {
-    private String id;
+    private  @Id String id;
     private int number;
-    private String color;
+    private Colour colour;
     private float amount;
     private String clientId;
-    private String rouletteId;
+    private @Indexed String rouletteId;
+    private Boolean win;
 }
